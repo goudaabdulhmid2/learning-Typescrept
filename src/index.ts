@@ -167,3 +167,244 @@
 
 
 */
+// =================================================================
+
+/* #12
+    - Data Types 
+    - Type Alias => nick name
+        type st = string;
+        let nameF: st = "hamid";
+
+        type standnum = string | number;
+        let c: standnum = "ssss";
+        c = 14;
+
+*/
+// ========================================================
+
+/* #13 
+    - Data Types Type Alias Advanced
+            type Buttons = {
+            up: string;
+            down: string;
+            left: string;
+            right: string;
+            };
+
+            function getActions(btns: Buttons) {
+            console.log(`Action for Button Is ${btns.up}`);
+            console.log(`Action for Button Is ${btns.down}`);
+            console.log(`Action for Button Is ${btns.left}`);
+            console.log(`Action for Button Is ${btns.right}`);
+            }
+
+            getActions({ up: "jump", right: "Go right", left: "Go left", down: "down" });
+
+
+            type Last = Buttons & {
+            x: boolean;
+            };
+
+            function getActions(btns: Last) {
+            console.log(`Action for Button Is ${btns.up}`);
+            console.log(`Action for Button Is ${btns.down}`);
+            console.log(`Action for Button Is ${btns.left}`);
+            console.log(`Action for Button Is ${btns.right}`);
+            }
+
+            getActions({
+            up: "jump",
+            right: "Go right",
+            left: "Go left",
+            down: "down",
+            x: true,
+            });
+
+            type Last = Buttons & {
+            x(): boolean;
+            };
+            function getActions(btns: Last) {
+            console.log(`Action for Button Is ${btns.up}`);
+            console.log(`Action for Button Is ${btns.down}`);
+            console.log(`Action for Button Is ${btns.left}`);
+            console.log(`Action for Button Is ${btns.right}`);
+            console.log(`Action for Button Is ${btns.x()}`);
+            }
+
+            getActions({
+            up: "jump",
+            right: "Go right",
+            left: "Go left",
+            down: "down",
+            x() {
+            return true;
+            },
+            });
+
+
+*/
+// ===============================================================================
+
+/* #14 
+    -  Data Types - Literal Types
+        type nums = 0 | 1 | -1;
+
+        function compere(num1: number, num2: number): nums {
+        if (num1 === num2) {
+            return 0;
+        } else if (num1 > num2) {
+            return 1;
+        } else {
+            return -1;
+        }
+        }
+
+        console.log(compere(1, 1));
+        console.log(compere(3, 1));
+        console.log(compere(1, 3));
+
+
+*/
+// ================================================================
+
+/* #15
+    - Data Types - Tuple
+    - Is another sort of array type 
+    - We know Exactly How many ele it contains
+    - We know which types it contain at specific positions
+
+            let artical: [number, string, boolean] = [11, "Title one", true];
+            artical = [13, "Title two", false];
+            artical.push(100);
+            console.log(artical); // [ 13, 'Title two', false, 100 ]
+
+            let artical: readonly [number, string, boolean] = [11, "Title one", true];
+            artical = [13, "Title two", false];
+            artical.push(100); // error
+
+            let artical: readonly [number, string, boolean] = [11, "Title one", true];
+            artical = [13, "Title two", false];
+
+            const [id, title, publish] = [...artical];
+            console.log(id, title, publish);
+
+*/
+// ==================================================================
+
+/* #16
+    - Data Types - Void And Never
+
+    - Void func that will return nothing 
+    - Func in js that not return a value will show undefind, undefind is not void
+
+            function logging(msg: string): void {
+            console.log(msg);
+            return;
+            }
+
+            console.log(logging("I am hamid"));
+            console.log("s");
+
+    - Nver, Return Type Never Returns
+    - The func dosen't have a normal completion
+    - It throws an error or never finshes runing at all "infinit loop"
+
+        const fail = (msg: string) => {
+        throw new Error(msg);
+        };
+
+        function alwysLog(name: string): never {
+        while (true) {
+        console.log(name);
+        }
+        }
+
+*/
+// ====================================================
+
+/* 17 
+    - Data Types - Enums Part 1
+    - Enums => Enumerations
+    - Used for logical groping collection of constants "Collection of related values".
+    - It organize ur code.
+    - By default Rnu are number-based, frist element is 0
+    - There is a numric enum
+    - There is a string-based enums
+    - There is heterogeneous enums [string , number]
+
+    
+                enum Level {
+                Kids = 15,
+                Easy = 9,
+                Medium = 6,
+                Hard = 3,
+                }
+
+                let lvl: string = "Easy";
+
+                if (lvl === "Easy") {
+                console.log(`The level is ${lvl} And number of seconds is ${Level.Easy}`);
+                }
+
+*/
+// ======================================================================
+/* #18 
+    - Data Types - Enums Part 2
+    - "preserveConstEnums": true,  Disable erasing 'const enum'. "Look to index.js withe const and without it if this config is commant "
+
+            const enum Level {
+            Kids = 15,
+            Easy = 9,
+            Medium = 6,
+            Hard = 3,
+            }
+
+    - 
+            enum Kids {
+            Five = 25,
+            Saven = 20,
+            Ten = 15,
+            }
+
+            enum Level {
+            Kid = Kids.Ten,
+            Easy = 9,
+            Medium = Easy,
+            Hard = Medium - 3,
+            }
+
+            let lvl: string = "Easy";
+
+            if (lvl === "Easy") {
+            console.log(`The level is ${lvl} And number of seconds is ${Level.Hard}`);
+            }
+
+    - 
+
+            function getHardSeconds(): number {
+            return 3;
+            }
+
+            enum Kids {
+            Five = 25,
+            Saven = 20,
+            Ten = 15,
+            }
+
+            enum Level {
+            Insane, // give it default intilaiz 0
+            Kid = Kids.Ten,
+            Easy = 9,
+            Medium = Easy,
+            Hard = getHardSeconds(),
+            // Insane2, // error must give it value
+            }
+
+            let lvl: string = "Easy";
+
+            if (lvl === "Easy") {
+            console.log(`The level is ${lvl} And number of seconds is ${Level.Hard}`);
+            }
+
+*/
+// ==========================================================
