@@ -629,28 +629,171 @@
     - Tack A look on HTMLElement Interface
 
     - Type aliases we can't do like we do in #24 and #25
-    
+
 */
+// ===============================================================
 
-// Homepage
-interface Settings {
-  theme: boolean;
-  readonly font: string;
-}
+/* #27 
+    - Class Type Annotations
 
-// Artical page
-interface Settings {
-  sidebar: boolean;
-}
+            class User {
+            u: string;
+            s: number;
+            msg: () => string;
+            constructor(username: string, salary: number) {
+            this.u = username;
+            this.s = salary;
+            this.msg = () => `Hello ${this.u} Your Salary Is ${this.s}`;
+            }
 
-// Contact page
-interface Settings {
-  external?: boolean;
-}
+            sayHello() {
+            return "Hello";
+            }
+            }
 
-let userInterface: Settings = {
-  theme: true,
-  font: "open",
-  sidebar: false,
-  external: true,
-};
+            let userOne = new User("Hamid", 300000);
+            console.log(userOne.msg());
+            console.log(userOne.sayHello());
+
+
+*/
+// =======================================================================
+
+/* #28
+    - Class Access Modifiers And Parameters Properties
+    - Public
+    - All Members of a class in TS are public
+    - All public members can be accessed anywhere without any restriction
+
+    - Private
+    - Members are visable only to class and not accessable out the class
+
+    - Protected 
+    - same like private but can be accessed using the deriving class
+
+    - TS is a layer on top of JS 
+    - It Should remove all annotations and although access modifiers "private for ex"
+
+            class User {
+            msg: () => string;
+            constructor(
+            private username: string,
+            protected salary: number,
+            public readonly address: string
+            ) {
+            this.msg = () => `Hello ${this.username} Your Salary Is ${this.salary}`;
+            }
+
+            sayHello() {
+            return "Hello";
+            }
+            }
+
+            let userOne = new User("Hamid", 300000, "cairo");
+            console.log(userOne.address);
+            console.log(userOne.msg());
+            console.log(userOne.sayHello());
+
+
+*/
+// ============================================
+/* #29
+    - Class Get And Set Accessors
+            class User {
+            msg: () => string;
+            constructor(
+            private _username: string,
+            protected salary: number,
+            public readonly address: string
+            ) {
+            this.msg = () => `Hello ${this._username} Your Salary Is ${this.salary}`;
+            }
+
+            sayHello() {
+            return "Hello";
+            }
+
+            get username(): string {
+            return this._username;
+            }
+
+            set username(val: string) {
+            this._username = val;
+            }
+            }
+
+            let userOne = new User("Hamid", 300000, "cairo");
+            console.log(userOne.username);
+            userOne.username = "mido";
+            console.log(userOne.username);
+
+            console.log(userOne.msg());
+            console.log(userOne.sayHello());
+
+
+
+*/
+// ===========================================================
+
+/* #30
+    - Class Static Members
+    - Don't use "name, length, call"
+
+            class User {
+            private static _created: number = 0;
+            public static get created(): number {
+            return User._created;
+            }
+            public static set created(value: number) {
+            User._created = value;
+            }
+            //   static getCount(): void {
+            //     console.log(`${this.created} Object Created`);
+            //   }
+            constructor(public username: string) {
+            User.created += 1;
+            }
+            }
+
+            let u1 = new User("hamid");
+            let u3 = new User("hamid");
+            let u4 = new User("hamid");
+            let u5 = new User("hamid");
+            let u6 = new User("hamid");
+            console.log(User.created);
+
+ */
+// ================================================================
+
+/* #31
+    -  Class Implements Interface
+
+            interface Settings {
+            theme: boolean;
+            font: string;
+            save?(): void;
+            }
+
+            // Class must belong at least property inside interface
+            class User implements Settings {
+            constructor(
+            public username: string,
+            public theme: boolean,
+            public font: string
+            ) {}
+            save(): void {
+            console.log("Saved");
+            }
+
+            update(): void {
+            console.log("Updated");
+            }
+            }
+            let userOne = new User("hamid", false, "Open Sans");
+
+            userOne.save();
+            userOne.update();
+
+
+
+*/

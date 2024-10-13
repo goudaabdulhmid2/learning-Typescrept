@@ -1,19 +1,18 @@
 "use strict";
-let user = {
-    id: 100,
-    username: "hamid",
-    country: "KSA",
-    sayHello() {
-        return `Hello ${this.username}`;
-    },
-    sayWelcome: () => {
-        return `Welcome ${user.username}`;
-    },
-    getDouble(n) {
-        return n * 2;
-    },
-};
-console.log(user.sayHello());
-console.log(user.sayWelcome());
-console.log(user.getDouble(4));
+class User {
+    constructor(username, theme, font) {
+        this.username = username;
+        this.theme = theme;
+        this.font = font;
+    }
+    save() {
+        console.log("Saved");
+    }
+    update() {
+        console.log("Updated");
+    }
+}
+let userOne = new User("hamid", false, "Open Sans");
+userOne.save();
+userOne.update();
 //# sourceMappingURL=index.js.map
