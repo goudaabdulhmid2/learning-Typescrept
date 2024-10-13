@@ -407,4 +407,250 @@
             }
 
 */
-// ==========================================================
+// ================================================================
+
+/* #19
+    -Data Types - Type Assertions
+    - Sometime Compiler Dosn't know the info we do
+            let myImg = document.getElementById("my-img") as HTMLImageElement;
+            let myImg = <HTMLImageElement>document.getElementById("my-img");
+            console.log(myImg.src);
+
+    - Ts is not perfoeming any check to make sure type assertion "as .... " is valid.
+
+            let data: any = 100;
+            console.log((data as string).repeat(3));
+
+            let data: any = "100";
+            console.log((data as string).repeat(3));
+
+*/
+// =======================================================
+
+/* #20
+    - Data Types - Union And Intersection Types
+    - The | symbol is used to create the unoin => "or"
+            let all: number | string = 100;
+
+    - Intersection is a type thet combines several types into one 
+    - The & symbol is used to create an intersection => "And"
+
+            type A = {
+            one: string;
+            two: number;
+            three: number;
+            };
+
+            type B = A & {
+            four: number;
+            };
+
+            type C = {
+            five: number;
+            };
+
+            type mix = A & C;
+
+*/
+// =================================================================
+
+/* #21
+    - Type Annotations With Object
+            let myObj: {
+            readonly username: string;
+            id: number;
+            hire?: boolean;
+            skills: {
+            one: string;
+            two: string;
+            };
+            } = {
+            username: "HAmid",
+            id: 1,
+            skills: {
+            one: "HTML",
+            two: "CSS",
+            },
+            };
+
+            myObj.username = "Fs"; ERROR
+
+            console.log(myObj);
+
+*/
+// ===============================================================
+
+/* #22 
+    - Interface Declaration
+    - Serve like types.
+    - The interface describe the shape of an oblect.
+    - It defines the syntax to follow.
+    - Use read only and optional opreator.
+
+            interface User {
+            id?: number;
+            readonly username: string;
+            country: string;
+            }
+
+    - Use with object.
+    
+
+            let user: User = {
+            id: 100,
+            username: "hamid",
+            country: "KSA",
+            };
+
+            // user.username = "ss";  ERROR
+
+    - Use with func.
+
+            function getData(data: User) {
+            console.log(`Id is ${data.id}`);
+            console.log(`Username is ${data.username}`);
+            console.log(`Country is ${data.country}`);
+            }
+
+            getData({
+            id: 100,
+            username: "hamid",
+            country: "KSA",
+            });
+
+*/
+// =================================================================================
+
+/* #23
+    - Interface Method And Parameters.
+    
+            interface User {
+            id: number;
+            username: string;
+            country: string;
+            sayHello(): string;
+            sayWelcome: () => string;
+            getDouble(num: number): number;
+            }
+
+            let user: User = {
+            id: 100,
+            username: "hamid",
+            country: "KSA",
+            sayHello() {
+            return `Hello ${this.username}`;
+            },
+            sayWelcome: () => {
+            return `Welcome ${user.username}`;
+            },
+            getDouble(n) {
+            return n * 2;
+            },
+            };
+
+            console.log(user.sayHello());
+            console.log(user.sayWelcome());
+            console.log(user.getDouble(4));
+
+*/
+// ================================================================
+
+/* #24
+    - Interface Reopen And Use Cases.
+
+        // What we are do here not extend we open interface and add another thing
+
+        // Homepage
+            interface Settings {
+            theme: boolean;
+            readonly font: string;
+            }
+
+        // Artical page
+            interface Settings {
+            sidebar: boolean;
+            }
+
+        // Contact page
+            interface Settings {
+            external?: boolean;
+            }
+
+            let userInterface: Settings = {
+            theme: true,
+            font: "open",
+            sidebar: false,
+            external: true,
+            };
+
+       
+
+
+*/
+// ===========================================================================
+
+/* #25
+    - Interface Extend
+
+        interface User {
+        id: number;
+        username: string;
+        country: string;
+        }
+
+        // interface Modarators extends User {
+        //   role: string | number;
+        // }
+
+        interface Modarators {
+        role: string | number;
+        }
+
+        interface Admin extends User, Modarators {
+        protect?: boolean;
+        }
+
+        let user: Admin = {
+        id: 100,
+        username: "hamid",
+        country: "KSA",
+        role: "mod",
+        protect: true,
+        };
+
+
+
+*/
+// ======================================================
+
+/* #26
+    - Interface Final Discussion
+    - Interface vs Type aliases
+    - Tack A look on HTMLElement Interface
+
+    - Type aliases we can't do like we do in #24 and #25
+    
+*/
+
+// Homepage
+interface Settings {
+  theme: boolean;
+  readonly font: string;
+}
+
+// Artical page
+interface Settings {
+  sidebar: boolean;
+}
+
+// Contact page
+interface Settings {
+  external?: boolean;
+}
+
+let userInterface: Settings = {
+  theme: true,
+  font: "open",
+  sidebar: false,
+  external: true,
+};
