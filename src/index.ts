@@ -797,3 +797,226 @@
 
 
 */
+// =================================================================
+
+/* #32
+    - Abstract Classes And Members
+    - We Cannot create an instance of Abstract Class 
+
+            abstract class Food {
+            constructor(public title: string) {}
+
+            abstract getCookingTime(): void;
+            }
+
+            class Pizaa extends Food {
+            constructor(title: string, public price: number) {
+            super(title);
+            }
+            getCookingTime(): void {
+            console.log("Cooking Time for Pizaa");
+            }
+            }
+
+            class Burger extends Food {
+            constructor(title: string, public price: number) {
+            super(title);
+            }
+            getCookingTime(): void {
+            console.log("Cooking Time for Burger");
+            }
+            }
+
+            let pizzaOne = new Pizaa("Awsso", 100);
+            console.log(pizzaOne.price);
+            console.log(pizzaOne.title);
+            pizzaOne.getCookingTime();
+
+*/
+// ======================================================================
+
+/* #33 
+    - Polymorphism And Method Override
+
+    - Polymorphism classes have the same methods but different implementaions 
+    
+
+    - Method Override
+    - Allowing child class to provide implementation of a method in parent class
+    - A method in child class must have same name as parant class.
+
+    - "noImplicitOverride" Ensure overriding members in derivedclasses are marked with an override modifier. 
+
+
+            class Player {
+            constructor(public name: string) {}
+
+            attack(): void {
+            console.log("Attacking Now.");
+            }
+            }
+
+            class Amazon extends Player {
+            constructor(name: string, public spears: number) {
+            super(name);
+            }
+
+            override attack(): void {
+            console.log("Attacking With Spears");
+            this.spears -= 1;
+            }
+            }
+
+            class Barbarian extends Player {
+            constructor(name: string, public axeDurability: number) {
+            super(name);
+            }
+
+            override attack(): void {
+            console.log("Attacking With Axe");
+            this.axeDurability -= 1;
+            }
+            }
+
+            let barOne = new Barbarian("Hamid", 100);
+            console.log(barOne.name);
+            barOne.attack();
+            console.log(barOne.axeDurability);
+
+
+
+*/
+// ============================================================================
+/* #34
+    - Generics Introduction
+    - Help Write A Reusable Code 
+    - Allow To pass type as a param to another type 
+    - You will be able to deal with multiple type without using ":any Type"
+    - We can Create:
+        Generic Class
+        Generic  function 
+        Generic Methods
+        Generic Interface
+
+                function returnNumber(val: number): number {
+                return val;
+                }
+
+                function returnString(val: string): string {
+                return val;
+                }
+
+                function returnBoolean(val: boolean): boolean {
+                return val;
+                }
+
+                // function returnType<GenericType>(val: GenericType): GenericType {
+                //   return val;
+                // }
+                function returnType<T>(val: T): T {
+                return val;
+                }
+
+                console.log(returnType<number>(100));
+                console.log(returnType<string>("100"));
+                console.log(returnType<boolean>(true));
+                console.log(returnType<number[]>([1, 4, 6, 7]));
+
+*/
+// ========================================================
+
+/* #35 
+    - Generics Multiple Types
+    - Arrow function
+    - Multiple Types
+    
+            const returnType = <T>(val: T): T => val;
+
+            console.log(returnType<number>(100));
+            console.log(returnType<string>("100"));
+
+            const testType = <T>(val: T): string =>
+            `The value is ${val} and type is ${typeof val}`;
+
+            console.log(testType<number>(100));
+            console.log(testType<string>("100"));
+
+            const multipleTypes = <T, S>(valOne: T, valTwo: S): string =>
+            `The First value is ${valOne} and type is ${typeof valOne}, second is ${valTwo} and type is ${typeof valTwo}`;
+
+            console.log(multipleTypes<string, number>("hamid", 100));
+            console.log(multipleTypes<string, boolean>("100", true));
+
+*/
+// ==========================================================================
+
+/* #36 
+    - Generics Classes
+
+            class User<T = string> {
+            constructor(public value: T) {}
+
+            show(msg: T): void {
+            console.log(`${msg}  ${this.value}`);
+            }
+            }
+
+            let userOne = new User<string>("hamid");
+            console.log(userOne.value);
+            userOne.show("hello");
+
+            // let userTwo = new User(100);
+            // console.log(userTwo.value);
+            // userTwo.show("hello"); error
+
+            let userTwo = new User<number | string>(100);
+            console.log(userTwo.value);
+            userTwo.show("hello");
+
+*/
+// =========================================================================
+/* #37
+    - Generics And Interfaces
+            interface Book {
+            itemType: string;
+            title: string;
+            isbn: number;
+            }
+            interface Game extends Book {
+            price: number;
+            }
+
+            class Collection<T> {
+            public data: T[] = [];
+            add(item: T): void {
+            this.data.push(item);
+            }
+            }
+
+            let itemOne = new Collection<Book | Game>();
+
+            itemOne.add({
+            itemType: "Book",
+            title: "one",
+            isbn: 131314,
+            });
+
+            itemOne.add({
+            itemType: "Game",
+            title: "Fifa",
+            isbn: 131314,
+            price: 100,
+            });
+
+            console.log(itemOne);
+*/
+// ====================================================
+
+/*# 38
+    - The End And How To Master Typescrip
+    - How to continue
+    - Practice 
+    - Topics not in the course
+        - JSDocs
+        - TsConfig
+*/

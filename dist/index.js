@@ -1,18 +1,23 @@
 "use strict";
-class User {
-    constructor(username, theme, font) {
-        this.username = username;
-        this.theme = theme;
-        this.font = font;
+class Collection {
+    constructor() {
+        this.data = [];
     }
-    save() {
-        console.log("Saved");
-    }
-    update() {
-        console.log("Updated");
+    add(item) {
+        this.data.push(item);
     }
 }
-let userOne = new User("hamid", false, "Open Sans");
-userOne.save();
-userOne.update();
+let itemOne = new Collection();
+itemOne.add({
+    itemType: "Book",
+    title: "one",
+    isbn: 131314,
+});
+itemOne.add({
+    itemType: "Game",
+    title: "Fifa",
+    isbn: 131314,
+    price: 100,
+});
+console.log(itemOne);
 //# sourceMappingURL=index.js.map
