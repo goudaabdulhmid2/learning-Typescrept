@@ -1,4 +1,4 @@
-We need to install this package to treat with TS:
+We need to install these packages to treat with TS:
     - npm i -d ts-node @types/node 
     - npm i -d typescript
     - npm i -D @types/express
